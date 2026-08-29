@@ -1,6 +1,6 @@
 import os
 
-BOT_TOKEN = os.environ.get("8804150359:AAFEHSFbijNUTiH1JqQlAciDbXnZg15fHvo")
+BOT_TOKEN = "8804150359:AAFEHSFbijNUTiH1JqQlAciDbXnZg15fHvo"  # <-- अपना असली टोकन डालो
 APKTOOL_PATH = "/usr/local/bin/apktool"
 ZIPALIGN_PATH = "/usr/bin/zipalign"
 APKSIGNER_PATH = "/usr/bin/apksigner"
