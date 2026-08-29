@@ -1,6 +1,6 @@
 import os
 
-BOT_TOKEN = os.environ.get("BOT_TOKEN", "YOUR_TELEGRAM_BOT_TOKEN")
+BOT_TOKEN = os.environ.get("8804150359:AAFEHSFbijNUTiH1JqQlAciDbXnZg15fHvo")
 APKTOOL_PATH = "/usr/local/bin/apktool"
 ZIPALIGN_PATH = "/usr/bin/zipalign"
 APKSIGNER_PATH = "/usr/bin/apksigner"
